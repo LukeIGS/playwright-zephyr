@@ -1,14 +1,14 @@
 // playwright.config.ts
 import { PlaywrightTestConfig } from '@playwright/test';
+import * as dotenv from 'dotenv';
+
+dotenv.config({ path: '.env' });
 
 const config: PlaywrightTestConfig = {
-  reporter: [['list'], ['./src', { 
-    host: '',
-    runName: '',
-    user: '',
-    password: '',
-    authorizationToken: '',
-    projectKey: ''
+  reporter: [['list'], ['./src/cloud', { 
+    runName: `testrun-${new Date().getTime()}`,
+    authorizationToken: process.env.ZEPHYR_AUTHORIZATION_TOKEN,
+    projectKey: 'QE'
   }]],
   use: {
       screenshot: 'only-on-failure'
